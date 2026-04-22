@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bagus Joyo Tirto Nugroho — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --border: #1e1e2e;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --accent3: #43e97b;
+      --text: #e8e8f0;
+      --muted: #6b6b85;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* ─── BLOBS ─── */
+    .blob {
+      position: fixed; border-radius: 50%; filter: blur(120px);
+      pointer-events: none; z-index: 0; opacity: 0.12;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; right: -100px; }
+    .blob-3 { width: 400px; height: 400px; background: var(--accent3); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 48px;
+      background: rgba(10,10,15,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--white); letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ─── WRAPPER ─── */
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px; align-items: center;
+      margin-bottom: 80px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 180px; height: 180px;
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+      z-index: 0;
+    }
+    .photo-frame img {
+      position: relative; z-index: 1;
+      width: 174px; height: 174px;
+      border-radius: 50%; object-fit: cover;
+      border: 4px solid var(--bg);
+      display: block; margin: 3px auto;
+    }
+    .photo-placeholder {
+      position: relative; z-index: 1;
+      width: 174px; height: 174px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 4px solid var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 3px auto;
+      color: var(--muted); font-size: 0.75rem;
+      text-align: center; gap: 8px;
+    }
+    .photo-placeholder svg { opacity: 0.4; }
+
+    .hero-text {}
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.25);
+      padding: 5px 14px; border-radius: 99px;
+      font-size: 0.75rem; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white); margin-bottom: 16px;
+    }
+    h1 .accent { color: var(--accent); }
+
+    .hero-bio {
+      color: var(--muted); font-size: 0.95rem;
+      max-width: 520px; line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .contact-row {
+      display: flex; flex-wrap: wrap; gap: 16px;
+    }
+    .contact-chip {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 7px 14px; border-radius: 8px;
+      font-size: 0.82rem; color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-chip:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .contact-chip svg { color: var(--accent); flex-shrink: 0; }
+
+    /* ─── SECTIONS ─── */
+    section { margin-bottom: 64px; opacity: 0; animation: fadeUp 0.8s ease forwards; }
+    section:nth-child(2) { animation-delay: 0.1s; }
+    section:nth-child(3) { animation-delay: 0.2s; }
+    section:nth-child(4) { animation-delay: 0.3s; }
+    section:nth-child(5) { animation-delay: 0.4s; }
+    section:nth-child(6) { animation-delay: 0.5s; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+    }
+    .section-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+    .section-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; color: var(--accent);
+      letter-spacing: 0.1em; font-weight: 700;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 28px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-3px); }
+
+    /* ─── EDUCATION ─── */
+    .edu-card {
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .edu-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(108,99,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--accent);
+    }
+    .edu-body {}
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      color: var(--white); margin-bottom: 4px;
+    }
+    .edu-school { color: var(--muted); font-size: 0.88rem; margin-bottom: 10px; }
+    .edu-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      padding: 3px 10px; border-radius: 6px;
+      font-size: 0.75rem; font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .pill.highlight { background: rgba(67,233,123,0.1); border-color: rgba(67,233,123,0.25); color: var(--accent3); }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-grid { display: flex; flex-direction: column; gap: 16px; }
+    .exp-card { }
+    .exp-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 12px;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+    }
+    .exp-company { font-size: 0.85rem; color: var(--accent); margin-top: 2px; }
+    .exp-year {
+      padding: 3px 12px; border-radius: 20px;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.2);
+      font-size: 0.75rem; color: var(--accent);
+      white-space: nowrap;
+    }
+    .exp-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .exp-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+    }
+    .exp-list li::before {
+      content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ─── PROJECTS ─── */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .project-card { }
+    .project-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,101,132,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent2); margin-bottom: 14px;
+    }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--white); margin-bottom: 10px; line-height: 1.4;
+    }
+    .project-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .project-list li {
+      font-size: 0.82rem; color: var(--muted);
+      display: flex; gap: 8px; line-height: 1.5;
+    }
+    .project-list li::before { content: '·'; color: var(--accent2); font-size: 1.2rem; line-height: 1.1; }
+
+    /* ─── SKILLS ─── */
+    .skills-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .skill-group-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      padding: 6px 14px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 500;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      background: rgba(108,99,255,0.12);
+      border-color: rgba(108,99,255,0.3);
+      transform: translateY(-2px);
+    }
+    .skill-tag.soft:hover {
+      background: rgba(67,233,123,0.1);
+      border-color: rgba(67,233,123,0.3);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.8rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .wrapper { padding: 90px 16px 60px; }
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 24px; }
+      .photo-frame { margin: 0 auto; }
+      .contact-row { justify-content: center; }
+      .project-grid { grid-template-columns: 1fr; }
+      .skills-wrapper { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">BJT<span>N</span></div>
+    <ul class="nav-links">
+      <li><a href="#pendidikan">Pendidikan</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- ─── HERO ─── -->
+    <div class="hero">
+      <div class="photo-frame">
+        <!-- Ganti src dengan path foto kamu, misal: src="foto.jpg" -->
+        <img src="pas foto.jpg" alt="Bagus Joyo Tirto Nugroho" style="position:relative;z-index:1;width:174px;height:174px;border-radius:50%;object-fit:cover;border:4px solid var(--bg);display:block;margin:3px auto;">
+      </div>
+
+      <div class="hero-text">
+        <div class="hero-tag">Tersedia untuk peluang baru</div>
+        <h1>Bagus Joyo<br>Tirto <span class="accent">Nugroho</span></h1>
+        <p class="hero-bio">
+          Profesional Ilmu Komputer dengan kemampuan analitis yang kuat dan pengalaman dalam pengolahan data, pengembangan web, serta dukungan operasional. Terbiasa bekerja secara terstruktur, teliti, dan adaptif dalam lingkungan kerja yang dinamis.
+        </p>
+        <div class="contact-row">
+          <a href="tel:+6285175455172" class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.13 1 .39 1.98.75 2.93a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.04-1.04a2 2 0 0 1 2.11-.45c.95.36 1.93.62 2.93.75A2 2 0 0 1 22 16.92z"/></svg>
+            +62 851-7545-5172
+          </a>
+          <a href="mailto:bagusnugroho1610@gmail.com" class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            bagusnugroho1610@gmail.com
+          </a>
+          <div class="contact-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Pematangsiantar, Sumatera Utara
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PENDIDIKAN ─── -->
+    <section id="pendidikan">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-label">Pendidikan</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="card edu-card">
+        <div class="edu-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="edu-body">
+          <div class="edu-degree">Sarjana Ilmu Komputer</div>
+          <div class="edu-school">Universitas Islam Negeri Sumatera Utara — Medan &nbsp;·&nbsp; 2020–2025</div>
+          <div class="edu-meta">
+            <span class="pill highlight">IPK 3.66</span>
+            <span class="pill">Web Development</span>
+            <span class="pill">Data Mining</span>
+            <span class="pill">Basis Data</span>
+            <span class="pill">Artificial Intelligence</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PENGALAMAN ─── -->
+    <section id="pengalaman">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-label">Pengalaman</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-grid">
+
+        <div class="card exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Staff Program</div>
+              <div class="exp-company">Dinas Pemuda dan Olahraga Sumatera Utara</div>
+            </div>
+            <span class="exp-year">2023</span>
+          </div>
+          <ul class="exp-list">
+            <li>Mengelola dokumentasi kegiatan secara sistematis untuk mendukung kelancaran operasional event</li>
+            <li>Berkontribusi dalam persiapan event skala besar (PON Sumut-Aceh)</li>
+            <li>Berkoordinasi dengan tim untuk memastikan alur kerja berjalan efisien</li>
+          </ul>
+        </div>
+
+        <div class="card exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Front-End Developer Team Leader</div>
+              <div class="exp-company">PT. Siantar Codes Academy</div>
+            </div>
+            <span class="exp-year">2025</span>
+          </div>
+          <ul class="exp-list">
+            <li>Memimpin tim dalam pengembangan website berbasis user-friendly dan responsive</li>
+            <li>Mengatur pembagian tugas tim untuk meningkatkan efisiensi</li>
+            <li>Mengembangkan tampilan website yang interaktif dan meningkatkan pengalaman pengguna</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS ─── -->
+    <section id="projects">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-label">Projects</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="project-grid">
+
+        <div class="card project-card">
+          <div class="project-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+            </svg>
+          </div>
+          <div class="project-title">Analisis Aktivitas Gempa di Indonesia (2008–2023)</div>
+          <ul class="project-list">
+            <li>Mengolah dan menganalisis data gempa untuk menemukan pola aktivitas seismik</li>
+            <li>±79% gempa terjadi pada kedalaman &lt;70 km</li>
+            <li>Menemukan korelasi antara kedalaman dan magnitude gempa</li>
+          </ul>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="project-title">Website Portal Desa Digital</div>
+          <ul class="project-list">
+            <li>Mengembangkan website dengan peta interaktif menggunakan Leaflet.js</li>
+            <li>Membuat dashboard admin untuk pengelolaan data (HTML, CSS, JavaScript)</li>
+            <li>Mengintegrasikan fitur layanan, berita, dan statistik yang dapat dikelola admin</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── SKILLS ─── -->
+    <section id="skills">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-label">Skills</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-wrapper">
+        <div class="card">
+          <div class="skill-group-title">Hard Skills</div>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="skill-group-title">Soft Skills</div>
+          <div class="skill-tags">
+            <span class="skill-tag soft">Problem Solving</span>
+            <span class="skill-tag soft">Analytical Thinking</span>
+            <span class="skill-tag soft">Team Leadership</span>
+            <span class="skill-tag soft">Communication</span>
+            <span class="skill-tag soft">Time Management</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Dibuat dengan ❤️ oleh <span>Bagus Joyo Tirto Nugroho</span> · 2025</p>
+  </footer>
+
+</body>
+</html>
