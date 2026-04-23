@@ -19,11 +19,11 @@
       --muted: #6b6b85;
       --white: #ffffff;
     }
-
+ 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     html { scroll-behavior: smooth; }
-
+ 
     body {
       background: var(--bg);
       color: var(--text);
@@ -32,7 +32,7 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
+ 
     /* ─── NOISE OVERLAY ─── */
     body::before {
       content: '';
@@ -40,7 +40,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 0; opacity: 0.4;
     }
-
+ 
     /* ─── BLOBS ─── */
     .blob {
       position: fixed; border-radius: 50%; filter: blur(120px);
@@ -49,7 +49,7 @@
     .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
     .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; right: -100px; }
     .blob-3 { width: 400px; height: 400px; background: var(--accent3); top: 50%; left: 50%; transform: translate(-50%,-50%); }
-
+ 
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -72,14 +72,14 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--white); }
-
+ 
     /* ─── WRAPPER ─── */
     .wrapper {
       position: relative; z-index: 1;
       max-width: 900px; margin: 0 auto;
       padding: 120px 24px 80px;
     }
-
+ 
     /* ─── HERO ─── */
     .hero {
       display: grid;
@@ -88,7 +88,7 @@
       margin-bottom: 80px;
       opacity: 0; animation: fadeUp 0.8s ease forwards;
     }
-
+ 
     .photo-frame {
       position: relative;
       width: 180px; height: 180px;
@@ -120,7 +120,7 @@
       text-align: center; gap: 8px;
     }
     .photo-placeholder svg { opacity: 0.4; }
-
+ 
     .hero-text {}
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
@@ -132,7 +132,7 @@
       margin-bottom: 16px;
     }
     .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-
+ 
     h1 {
       font-family: 'Syne', sans-serif;
       font-size: clamp(2rem, 5vw, 3.2rem);
@@ -140,13 +140,13 @@
       color: var(--white); margin-bottom: 16px;
     }
     h1 .accent { color: var(--accent); }
-
+ 
     .hero-bio {
       color: var(--muted); font-size: 0.95rem;
       max-width: 520px; line-height: 1.8;
       margin-bottom: 28px;
     }
-
+ 
     .contact-row {
       display: flex; flex-wrap: wrap; gap: 16px;
     }
@@ -160,7 +160,7 @@
     }
     .contact-chip:hover { border-color: var(--accent); transform: translateY(-2px); }
     .contact-chip svg { color: var(--accent); flex-shrink: 0; }
-
+ 
     /* ─── SECTIONS ─── */
     section { margin-bottom: 64px; opacity: 0; animation: fadeUp 0.8s ease forwards; }
     section:nth-child(2) { animation-delay: 0.1s; }
@@ -168,7 +168,7 @@
     section:nth-child(4) { animation-delay: 0.3s; }
     section:nth-child(5) { animation-delay: 0.4s; }
     section:nth-child(6) { animation-delay: 0.5s; }
-
+ 
     .section-header {
       display: flex; align-items: center; gap: 16px;
       margin-bottom: 28px;
@@ -187,7 +187,7 @@
       font-size: 0.7rem; color: var(--accent);
       letter-spacing: 0.1em; font-weight: 700;
     }
-
+ 
     /* ─── CARDS ─── */
     .card {
       background: var(--card);
@@ -196,7 +196,7 @@
       transition: border-color 0.25s, transform 0.25s;
     }
     .card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-3px); }
-
+ 
     /* ─── EDUCATION ─── */
     .edu-card {
       display: flex; gap: 20px; align-items: flex-start;
@@ -223,7 +223,7 @@
       color: var(--text);
     }
     .pill.highlight { background: rgba(67,233,123,0.1); border-color: rgba(67,233,123,0.25); color: var(--accent3); }
-
+ 
     /* ─── EXPERIENCE ─── */
     .exp-grid { display: flex; flex-direction: column; gap: 16px; }
     .exp-card { }
@@ -252,7 +252,7 @@
     .exp-list li::before {
       content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px;
     }
-
+ 
     /* ─── PROJECTS ─── */
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .project-card { }
@@ -273,7 +273,7 @@
       display: flex; gap: 8px; line-height: 1.5;
     }
     .project-list li::before { content: '·'; color: var(--accent2); font-size: 1.2rem; line-height: 1.1; }
-
+ 
     /* ─── SKILLS ─── */
     .skills-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .skill-group-title {
@@ -301,7 +301,28 @@
       background: rgba(67,233,123,0.1);
       border-color: rgba(67,233,123,0.3);
     }
-
+ 
+    /* ─── DOWNLOAD BUTTON ─── */
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--accent), #9b59f5);
+      color: var(--white); text-decoration: none;
+      padding: 12px 24px; border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 20px rgba(108,99,255,0.35);
+      margin-top: 16px;
+    }
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(108,99,255,0.5);
+    }
+    .btn-download:active { transform: translateY(0); opacity: 0.9; }
+    .btn-download svg { flex-shrink: 0; }
+ 
     /* ─── FOOTER ─── */
     footer {
       position: relative; z-index: 1;
@@ -310,13 +331,13 @@
       color: var(--muted); font-size: 0.8rem;
     }
     footer span { color: var(--accent); }
-
+ 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
+ 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
@@ -331,12 +352,12 @@
   </style>
 </head>
 <body>
-
+ 
   <!-- Blobs -->
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
-
+ 
   <!-- Nav -->
   <nav>
     <div class="nav-logo">BJT<span>N</span></div>
@@ -347,16 +368,16 @@
       <li><a href="#skills">Skills</a></li>
     </ul>
   </nav>
-
+ 
   <div class="wrapper">
-
+ 
     <!-- ─── HERO ─── -->
     <div class="hero">
       <div class="photo-frame">
         <!-- Ganti src dengan path foto kamu, misal: src="foto.jpg" -->
         <img src="pas foto.jpg" alt="Bagus Joyo Tirto Nugroho" style="position:relative;z-index:1;width:174px;height:174px;border-radius:50%;object-fit:cover;border:4px solid var(--bg);display:block;margin:3px auto;">
       </div>
-
+ 
       <div class="hero-text">
         <div class="hero-tag">Tersedia untuk peluang baru</div>
         <h1>Bagus Joyo<br>Tirto <span class="accent">Nugroho</span></h1>
@@ -376,6 +397,14 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             Pematangsiantar, Sumatera Utara
           </div>
+          <a href="CV-Bagus_nugroho.pdf" download="CV_Bagus_Joyo_Tirto_Nugroho.pdf" class="btn-download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download CV
+          </a>
         </div>
       </div>
     </div>
